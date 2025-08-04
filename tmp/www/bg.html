@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+<style>
+
+
+@keyframes colorRotate {
+  from {
+    color: #6666ff;
+  }
+  10% {
+    color: #0099ff;
+  }
+  50% {
+    color: #00ff00;
+  }
+  75% {
+    color: #ff3399;
+  }
+  100% {
+    color: #6666ff;
+  }
+}
+
+.Title {
+  font-family: 'Montserrat';
+  font-size: 50px;
+  color: aliceblue;
+  text-align: center;
+  animation: colorRotate 6s linear 0s infinite;
+  margin-top: 0;
+}
+
+.Title h2 {
+    margin-top: 0;
+}
+.Buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40%;
+}
+
+.Buttons button {
+  font-family: 'Montserrat';
+  border-radius: 6px;
+  font-size: 30px;
+  padding: 1% 2%;
+  color: white;
+  cursor: pointer;
+  background: rgb(75, 75, 75);
+  border-color: white;
+}
+
+@-webkit-keyframes Harifidy {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes Harifidy {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.Harifidy {
+  width: 20%;
+  height: auto;
+  position: absolute;
+  top: 30%;
+  left: 10%;                  /* place le point de référence au milieu */
+  transform: translateX(-50%);
+  -webkit-animation: Lucas 2s linear infinite;
+  -moz-animation: Lucas 2s linear infinite;
+  -ms-animation: Lucas 2s linear infinite;
+  -o-animation: Lucas 2s linear infinite;
+  animation: Lucas 2s linear infinite;
+}
+
+@-webkit-keyframes Lucas {
+  from {
+        -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+@keyframes Lucas {
+  from {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+  to {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+
+
+.Lucas {
+  width: 20%;
+  height: auto;
+  position: absolute;
+  top: 30%;
+  left: 70%;                  /* place le point de référence au milieu */
+  transform: translateX(-50%);
+  -webkit-animation:  2s linear infinite;
+  -moz-animation: Harifidy 2s linear infinite;
+  -ms-animation: Harifidy 2s linear infinite;
+  -o-animation: Harifidy 2s linear infinite;
+  animation: Harifidy 2s linear infinite;
+}
+
+.FortyTwo {
+  width: 50%;
+  height: auto;
+  position: absolute; 
+  top: 30%;
+  left: 25%;
+}
+
+
+body {
+  background: linear-gradient(to bottom, rgb(23, 38, 53), rgb(26, 33, 41), rgb(70, 85, 100), rgb(87, 87, 87));
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100vh;
+  margin: 0;
+}
+
+.hidden {display:none;}
+
+</style>
+</head>
+<body style="background: linear-gradient(to bottom, rgb(23, 38, 53), rgb(26, 33, 41), rgb(70, 85, 100), rgb(87, 87, 87));">
+
+<div class="Title">
+  <h2>LES GOATS CI-DESSOUS!!!</h2>
+</div>
+
+
+<div class="Buttons">
+  <button type="button" onclick="window.location.href='/index.html'">
+    HOME
+  </button>
+</div>
+
+<div class="rotating">
+  <img src="/hadubois.jpg" class="Harifidy">
+</div>
+<div class="rotating">
+    <img src="/lle-duc.jpg" class="Lucas">
+</div>
+
+<div class="FortyTwo">
+    <img src="https://www.etudestech.com/wp-content/uploads/2021/08/42_logo.png" class="FortyTwo">
+</div>
+</body>
+</html> 

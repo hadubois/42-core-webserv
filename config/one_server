@@ -1,0 +1,55 @@
+{
+    Port = 8100
+
+    server_name = http://localhost:8100/
+
+    default_page = ./tmp/www/index.html
+    404_page = ./tmp/www/404.html
+
+    redirection_page = ./tmp/www/redirectme
+    redirection_url = https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+    Max_client_body_size = 2500
+
+    request_timeout = 500
+
+    Max_request = 10
+
+    client_header_buffer_size = 1024
+
+    client_timeout_inactivity = 1000
+
+    location / = {
+
+        cgi_enabled = true
+
+        cgi_folder = ./tmp/www/
+
+        cgi_allowed_ext = .py .out
+
+        auto_index = true
+
+		upload_enabled = true
+		upload_folder = ./tmp/upload/
+    }
+
+    location /cgi = {
+        cgi_enabled = true
+
+        cgi_folder = ./tmp/cgi/
+
+        cgi_allowed_ext = .py .rb
+    }
+
+	location /upload/ = {
+		cgi_folder = ./tmp/upload/
+        auto_index = true
+		upload_enabled = true
+		upload_folder = ./tmp/upload/
+	}
+
+    allowed_methods = {
+        POST
+        GET
+    }
+}

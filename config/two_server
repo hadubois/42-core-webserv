@@ -1,0 +1,98 @@
+{
+    Port = 8090
+
+    server_name = http://localhost:8090/
+
+    default_page = ./tmp/www/index.html
+    404_page = ./tmp/www/404.html
+
+    redirection_page = ./tmp/www/redirectme
+    redirection_url = https://google.com/
+
+    Max_client_body_size = 80
+
+    request_timeout = 250
+
+    Max_request = 10
+
+    client_header_buffer_size = 1000
+
+    client_timeout_inactivity = 1000
+
+    location /cgi/test/ = {
+
+        cgi_enabled = true
+
+        cgi_folder = cgi/
+
+        cgi_allowed_ext = .py .out
+
+        auto_index = true
+    }
+
+    location /cgi = {
+        cgi_enabled = false
+
+        cgi_folder = cgi/
+
+        cgi_allowed_ext = .txt .exe
+    }
+
+    allowed_methods = {
+        POST
+        GET
+        DELETE
+    }
+}
+{
+    Port = 8080
+
+    server_name = http://localhost:8080/
+
+    default_page = ./tmp/www/index.html
+    404_page = ./tmp/www/404.html
+
+    redirection_page = ./tmp/www/redirectme
+    redirection_url = https://profile.intra.42.fr/#
+
+    Max_client_body_size = 250
+
+    request_timeout = 250
+
+    Max_request = 10
+
+    client_header_buffer_size = 1000
+
+    client_timeout_inactivity = 5
+
+	location / = {
+		cgi_folder = ./tmp/www/
+		upload_enabled = true
+		upload_folder = ./tmp/upload/
+	}
+
+	location /upload/ = {
+		cgi_folder = ./tmp/upload/
+		upload_enabled = true
+        auto_index = true
+	}
+
+    location /cgi/ = {
+        cgi_enabled = false
+
+        cgi_folder = ./tmp/upload/
+
+        cgi_allowed_ext = .lexav .niel
+
+        auto_index = true
+
+        upload_enabled = true
+
+        upload_folder = ./tmp/upload/
+    }
+    allowed_methods = {
+        POST
+        GET
+        DELETE
+    }
+}
