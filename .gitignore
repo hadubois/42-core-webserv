@@ -3,6 +3,6 @@ tags
 obj
 */obj
 tests/test
-tmp/upload/
+tmp/upload/*
 webserv
 libwebserv.a

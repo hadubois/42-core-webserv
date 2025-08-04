@@ -6,7 +6,7 @@
 /*   By: hadubois <hadubois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 11:55:56 by lle-duc           #+#    #+#             */
-/*   Updated: 2025/08/04 10:43:45 by hadubois         ###   ########.fr       */
+/*   Updated: 2025/08/04 13:48:24 by hadubois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,8 +200,9 @@ void Server::close_client(std::map<int, t_node *> &node_map, t_node *node, t_soc
     send(fd, response.c_str(), response.size(), MSG_NOSIGNAL);
     epoll_ctl(datas.epoll_fd, EPOLL_CTL_DEL, fd, NULL);
     close(fd);
-    node_map.erase(fd);
+	delete node->client;
     delete node;
+    node_map.erase(fd);
 }
 
 Server *Server::clone(void) const

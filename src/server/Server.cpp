@@ -6,7 +6,7 @@
 /*   By: hadubois <hadubois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 11:49:29 by lle-duc           #+#    #+#             */
-/*   Updated: 2025/08/04 12:25:25 by hadubois         ###   ########.fr       */
+/*   Updated: 2025/08/04 14:11:56 by hadubois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void    Server::fill_config_datas(void)
 void Server::Start_server(void)
 {
     fill_config_datas();
-    DEBUG("Starting server!");
+    std::cout << "Starting server on port " << Get_port() << std::endl;
     int serverSocket = socket(AF_INET, SOCK_STREAM, 0);
 
     sockaddr_in serverAddress;
@@ -73,7 +73,7 @@ void Server::Start_server(void)
             sizeof(serverAddress)) == -1)
     {
         DEBUG("PORT ISSUE : " << Get_port());
-        throw std::runtime_error("Port already used ! Bind Failed !\n");
+        throw std::runtime_error("Port already used ! Bind Failed ! Exiting..\n");
     }
     if(listen(serverSocket, 50) != 0)
         print_errors("Listen failed, can't handle connections");
@@ -99,8 +99,8 @@ void Server::send_page_to_client(Client &client, std::map<int, t_node *> &node_m
     fs.open(client.Get_Exchange().getReq().getUrl().c_str(), std::ifstream::binary);
     if (!fs.is_open())
     {
-        if (client.Get_Exchange().getRes().getStatusCode() == 302)
-            close_client(node_map, node, datas);
+        // if (client.Get_Exchange().getRes().getStatusCode() == 302)
+        //     close_client(node_map, node, datas);
         node->client->Clear_exchange(Config);
         return ;
     }
@@ -120,8 +120,18 @@ void Server::send_page_to_client(Client &client, std::map<int, t_node *> &node_m
 		std::memset(buffer, '\0', 1024);
     }
     node->client->Clear_exchange(Config);
-    // if (client.Get_Exchange().getReq().getState() == RS_CLOSE || client.Get_Exchange().getRes().getStatusCode() != 200)
+    if (client.Get_Exchange().getReq().getState() == RS_CLOSE || client.Get_Exchange().getRes().getStatusCode() != 200)
         close_client(node_map, node, datas);
+    else
+    {
+        struct epoll_event ev;
+        ev.events = EPOLLIN;
+        ev.data.ptr = node;
+        if (epoll_ctl(datas.epoll_fd, EPOLL_CTL_MOD, node->fd, &ev) == -1)
+        {
+            // perror("epoll_ctl: remove EPOLLOUT"); connection interrompu entre temps, rien de derangeant
+        }   
+    }
 }
 
 void Server::new_client_setup(t_sockets_datas &datas, Monitor &ServerMonitor)

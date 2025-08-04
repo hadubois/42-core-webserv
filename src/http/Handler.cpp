@@ -242,7 +242,7 @@ void	Handler::handlePost(HttpRequest& req, HttpResponse& res) {
 void	Handler::uploadFile(HttpRequest& req, HttpResponse& res) {
 	if (req.getLocationConfig().getUploadPath().empty()
 			|| access(req.getLocationConfig().getUploadPath().c_str(), W_OK) != 0) {
-		ERROR("403 Forbidden: upload with invalid path or rights");
+		ERROR("403 Forbidden: upload with invalid path or rights" << req.getLocationConfig().getUploadPath());
 		req.setErrCode(403);
 		req.setState(RS_CLOSE) ;
 		return ;

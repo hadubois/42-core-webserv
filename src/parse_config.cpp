@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_config.cpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lle-duc <lle-duc@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hadubois <hadubois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 14:24:13 by lle-duc           #+#    #+#             */
-/*   Updated: 2025/08/02 12:47:12 by lle-duc          ###   ########.fr       */
+/*   Updated: 2025/08/04 13:51:17 by hadubois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,21 +100,24 @@ void	Start_all_servers(std::string config_file)
 			}
 		}
 		file.close();
+		
+		respond_to_client(datas, node_datas);
+		
+		for (int i = Server_List.size(); i > 0; i--)
+		{
+			delete Server_List.back();
+			Server_List.pop_back();
+		}
+		for (std::map<int,
+			t_node *>::iterator i = node_datas.Get_Monitor_map().begin(); i != node_datas.Get_Monitor_map().end(); i++)
+		{
+			delete i->second->client;
+			delete i->second;
+		}
+		delete[] datas.request;
 	}
 	catch (const std::exception &e)
 	{
 		std::cerr << e.what() << '\n';
 	}
-	respond_to_client(datas, node_datas);
-	for (int i = Server_List.size(); i > 0; i--)
-	{
-		delete Server_List.back();
-		Server_List.pop_back();
-	}
-	for (std::map<int,
-		t_node *>::iterator i = node_datas.Get_Monitor_map().begin(); i != node_datas.Get_Monitor_map().end(); i++)
-	{
-		delete i->second;
-	}
-	delete[] datas.request;
 }

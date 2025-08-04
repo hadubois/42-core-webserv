@@ -51,5 +51,6 @@
     allowed_methods = {
         POST
         GET
+        DELETE
     }
 }

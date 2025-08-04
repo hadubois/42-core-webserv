@@ -40,13 +40,6 @@ void respond_to_client(t_sockets_datas &datas, Monitor &node_datas)
                 {
                     node->client->Update_Last_Activity();
                     node->server->send_page_to_client(*node->client, node_datas.Get_Monitor_map(), node, datas);
-                    struct epoll_event ev;
-                    ev.events = EPOLLIN;
-                    ev.data.ptr = node;
-                    if (epoll_ctl(datas.epoll_fd, EPOLL_CTL_MOD, node->fd, &ev) == -1)
-                    {
-                        // perror("epoll_ctl: remove EPOLLOUT"); connection interrompu entre temps, rien de derangeant
-                    }   
                 }
             }
         }
